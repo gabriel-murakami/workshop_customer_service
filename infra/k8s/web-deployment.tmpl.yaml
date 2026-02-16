@@ -4,19 +4,19 @@ metadata:
   name: web-deployment
   namespace: workshop
   labels:
-    app: web
-    tags.datadoghq.com/service: workshop-customer-service
+    app: customer-service
+    tags.datadoghq.com/service: customer-service
     tags.datadoghq.com/env: development
     tags.datadoghq.com/version: "1.0.0"
 spec:
   selector:
     matchLabels:
-      app: web
+      app: customer-service
   template:
     metadata:
       labels:
-        app: web
-        tags.datadoghq.com/service: workshop-customer-service
+        app: customer-service
+        tags.datadoghq.com/service: customer-service
         tags.datadoghq.com/env: development
         tags.datadoghq.com/version: "1.0.0"
       annotations:
@@ -24,14 +24,14 @@ spec:
           [
             {
               "source": "ruby",
-              "service": "workshop-customer-service"
+              "service": "customer-service"
             }
           ]
     spec:
       imagePullSecrets:
         - name: ghcr-secret
       containers:
-        - name: web
+        - name: customer-service
           image: "${IMAGE_URI}"
           imagePullPolicy: Always
           ports:
