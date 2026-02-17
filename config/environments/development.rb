@@ -16,6 +16,9 @@ Rails.application.configure do
   end
 
   config.hosts << "customer-service.workshop.svc.cluster.local"
+  config.hosts << "customer-service"
+  config.hosts << "customer-service:3000"
+  config.hosts << ".ngrok-free.app"
 
   config.active_storage.service = :local
   config.action_mailer.raise_delivery_errors = true

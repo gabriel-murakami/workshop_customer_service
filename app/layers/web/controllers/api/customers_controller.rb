@@ -2,8 +2,7 @@ module Web
   module Controllers
     module Api
       class CustomersController < Web::Controllers::ApplicationController
-        BASE_FIELDS = %i[id name document_number email phone]
-        ADD_VEHICLE_FIELDS = %i[license_plate]
+        BASE_FIELDS = %i[id name document_number email phone search_param]
 
         def index
           render json: Application::Customer::CustomerApplication.new.find_all,
@@ -11,7 +10,11 @@ module Web
         end
 
         def show
-          customer = Application::Customer::CustomerApplication.new.find_by_document_number(customer_params[:document_number])
+          customer = if CPF.valid?(customer_params[:search_param])
+            Application::Customer::CustomerApplication.new.find_by_document_number(customer_params[:search_param])
+          else
+            Application::Customer::CustomerApplication.new.find_by_id(customer_params[:search_param])
+          end
 
           render json: customer, include: :vehicles, serializer: ::Serializers::Domain::Customer::CustomerSerializer
         end
@@ -41,12 +44,8 @@ module Web
 
         private
 
-        def permitted_params
-          params.permit(BASE_FIELDS | ADD_VEHICLE_FIELDS)
-        end
-
         def customer_params
-          permitted_params.except(ADD_VEHICLE_FIELDS)
+          params.permit(BASE_FIELDS)
         end
       end
     end

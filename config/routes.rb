@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       namespace :api do
         scope controller: :customers do
           resources :customers, only: %i[index create update destroy]
-          get "customers/:document_number", action: :show
+          get "customers/:search_param", action: :show
           patch "customers/:document_number/add_vehicle", action: :add_vehicle
         end
 
