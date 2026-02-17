@@ -47,7 +47,7 @@ Rails.application.configure do
         trace_id: correlation.trace_id.to_s,
         span_id:  correlation.span_id.to_s,
         env:      Rails.env,
-        service:  "workshop-customer-service"
+        service:  "customer-service"
       },
       ddsource: "ruby"
     }

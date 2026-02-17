@@ -1,7 +1,7 @@
 require "datadog/statsd"
 
 Datadog.configure do |c|
-  c.service = "workshop"
+  c.service = "customer-service"
   c.env = Rails.env
   c.version = "1.0.0"
 
