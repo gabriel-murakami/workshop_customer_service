@@ -35,7 +35,7 @@ jobs:
           envsubst < infra/k8s/customer-service-deployment.tmpl.yaml > infra/k8s/customer-service-deployment.yaml
           envsubst < infra/k8s/web-secret.tmpl.yaml > infra/k8s/web-secret.yaml
 
-      - uses: hashicorp/setup-terraform@v2
+      - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.12.2
 
